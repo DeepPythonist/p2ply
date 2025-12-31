@@ -48,7 +48,6 @@ def main():
         print("[*] Installing dependencies...")
         subprocess.check_call(['npm', 'install'], cwd=PROJ_DIR)
 
-    # Auto-enable remote mode as per user request
     remote_mode = True
     
     env = os.environ.copy()
@@ -68,11 +67,9 @@ def main():
     if remote_mode:
         print("[*] establishing secure tunnel...")
         
-        # Create temp file path but don't keep the file so ssh-keygen can create it
         with tempfile.NamedTemporaryFile(delete=True, prefix='p2ply_key_') as tmp:
             temp_key_path = tmp.name
         
-        # Generate new key for unique identity
         subprocess.check_call(['ssh-keygen', '-t', 'ed25519', '-f', temp_key_path, '-N', '', '-q'])
         
         cmd = [
@@ -90,18 +87,14 @@ def main():
             while True:
                 line = p_tunnel.stdout.readline()
                 if not line: break
-                # print(f"[SSH] {line.strip()}") # Suppressed for clean output
                 
-                # Robust regex extraction including lhr.life
                 match = re.search(r'(https://[a-zA-Z0-9-]+\.(localhost\.run|lhr\.life))', line)
                 if match:
                     url = match.group(1)
-                    # Ignore the admin or doc URLs
                     if 'admin.localhost.run' not in url and 'localhost.run/docs' not in url:
                         print(f"\n\n[+] REMOTE ACCESS URL: {url}")
                         print("[!] Share this URL ONLY with trusted peers.")
                         
-                        # Send URL to Node server
                         try:
                             import urllib.request
                             import json

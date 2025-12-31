@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 });
 
 app.use(rateLimiter);
-app.use(express.json()); // Enable JSON body parsing
+app.use(express.json());
 app.use(express.static('public'));
 
 let remoteUrl = null;
@@ -58,7 +58,6 @@ let remoteUrl = null;
 app.post('/set-remote-url', (req, res) => {
     if (req.body.url) {
         remoteUrl = req.body.url;
-        console.log(`[Config] Remote URL updated: ${remoteUrl}`);
     }
     res.sendStatus(200);
 });
@@ -77,7 +76,6 @@ io.on('connection', (socket) => {
             created: Date.now()
         });
 
-        // Send both code and remoteUrl
         socket.emit('pair-code', { code, remoteUrl });
 
         setTimeout(() => {
@@ -117,8 +115,6 @@ io.on('connection', (socket) => {
             io.to(data.target).emit('session-ended');
         }
     });
-
-
 });
 
 const listener = server.listen(PORT, '0.0.0.0', () => {

@@ -8,14 +8,12 @@ let candidateQueue = [];
 let peerSocketId = null;
 let peerFingerprintFull = null;
 
-// Configs
 const PADDING_SIZE = 1024;
 
 const config = {
     iceServers: []
 };
 
-// DOM Elements
 const dom = {
     status: document.getElementById('connection-status'),
     myFingerprint: document.getElementById('my-fingerprint'),
@@ -48,11 +46,9 @@ function updateStatus(msg, type = 'normal') {
     dom.status.className = 'status ' + (type === 'error' ? 'error' : (type === 'success' ? 'connected' : 'disconnected'));
 }
 
-// --- HELPER: Unified Send (P2P + Relay Fallback) ---
 function sendSecureSignal(type, payload) {
     const msg = { type, payload };
 
-    // 1. Try DataChannel (Fastest & Simplest)
     if (dataChannel && dataChannel.readyState === 'open') {
         try {
             dataChannel.send(JSON.stringify(msg));
@@ -62,12 +58,11 @@ function sendSecureSignal(type, payload) {
         }
     }
 
-    // 2. Fallback to Relay (Slower but reliable)
     if (peerSocketId) {
         socket.emit('signal', {
             target: peerSocketId,
             type: 'relay-packet',
-            payload: msg // Server relays 'payload'
+            payload: msg
         });
         return 'Relay';
     }
@@ -259,7 +254,6 @@ function createPeerConnection(targetId, initiator) {
     }
 }
 
-// Handle incoming secure packets
 async function handleSecurePacket(msg) {
     try {
         if (msg.type === 'handshake') {
@@ -340,7 +334,6 @@ function reset() {
 
 let currentRemoteUrl = null;
 
-// UI Handlers
 dom.msgInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') dom.btnSend.click();
 });
@@ -394,7 +387,6 @@ dom.btnKill.onclick = () => {
     location.reload();
 };
 
-// Socket Events
 socket.on('pair-code', (data) => {
     dom.codeDisplay.classList.remove('hidden');
     if (typeof data === 'object') {
@@ -438,13 +430,11 @@ socket.on('signal', async (data) => {
         await deriveSecret(data.payload);
 
     } else if (data.type === 'chat-relay') {
-        // Legacy relay handler
         log('RX Legacy Relay');
         const text = await decrypt(data.payload);
         addMessage(text, 'received');
 
     } else if (data.type === 'relay-packet') {
-        // NEW Generic Relay Handler
         handleSecurePacket(data.payload);
     }
 });

@@ -11,13 +11,11 @@
 
 <body>
     <div id="app">
-        <!-- Header -->
         <header>
             <h1>P2Ply</h1>
             <div id="connection-status" class="status disconnected">Disconnected</div>
         </header>
 
-        <!-- Setup Panel (Initial View) -->
         <div id="setup-panel">
             <div class="card">
                 <h2>Your Identity</h2>
@@ -45,10 +43,8 @@
             </div>
         </div>
 
-        <!-- Chat Panel (Active Session) -->
         <div id="chat-panel" class="hidden">
 
-            <!-- Verification Overlay -->
             <div id="verify-modal" class="hidden">
                 <h2>Security Check</h2>
                 <p>Do these fingerprints match?</p>
@@ -71,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- Active Chat View -->
             <div id="secure-chat-view" class="hidden">
                 <div
                     style="padding: 10px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
@@ -93,7 +88,6 @@
                 </div>
             </div>
         </div>
-        <!-- Footer -->
         <footer
             style="margin-top: auto; padding: 15px; text-align: center; font-size: 0.7rem; color: var(--text-muted); border-top: 1px solid var(--border);">
             <p>Open Source & Secure</p>

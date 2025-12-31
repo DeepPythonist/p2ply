@@ -2,11 +2,8 @@
     --bg-dark: #0f172a;
     --bg-card: rgba(30, 41, 59, 0.7);
     --primary: #3b82f6;
-    /* Blue */
     --accent: #10b981;
-    /* Emerald */
     --danger: #ef4444;
-    /* Red */
     --text-main: #f1f5f9;
     --text-muted: #94a3b8;
     --border: rgba(255, 255, 255, 0.1);
@@ -32,13 +29,11 @@ body {
         radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.15) 0%, transparent 40%);
     overflow: hidden;
-    /* Prevent body scroll */
 }
 
 #app {
     width: 100%;
     max-width: 480px;
-    /* Mobile-first container */
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -57,7 +52,6 @@ body {
     }
 }
 
-/* Header */
 header {
     padding: 20px;
     text-align: center;
@@ -100,7 +94,6 @@ h1 {
     color: #f59e0b;
 }
 
-/* Panels */
 #setup-panel,
 #chat-panel {
     flex: 1;
@@ -127,7 +120,6 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Fingerprint Display */
 .fingerprint-display {
     font-family: 'Courier New', monospace;
     display: block;
@@ -141,7 +133,6 @@ h2 {
     font-weight: bold;
 }
 
-/* Form Elements */
 input {
     width: 100%;
     padding: 14px;
@@ -198,7 +189,6 @@ button.success {
     background: var(--accent);
 }
 
-/* Chat Area */
 #secure-chat-view {
     display: flex;
     flex-direction: column;
@@ -250,7 +240,6 @@ button.success {
     text-align: right;
 }
 
-/* Input Area */
 .input-area {
     display: flex;
     gap: 10px;
@@ -267,7 +256,6 @@ button.success {
     padding: 0 24px;
 }
 
-/* Utilities */
 .hidden {
     display: none !important;
 }
@@ -298,7 +286,6 @@ button.success {
     right: 0;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -323,7 +310,6 @@ button.success {
     }
 }
 
-/* Verification Modal Overlay */
 #verify-modal {
     position: absolute;
     top: 0;
