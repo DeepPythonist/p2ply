@@ -20,33 +20,35 @@ They store your metadata. They back up your chats to their clouds. They comply w
 
 ```mermaid
 graph TD
-    subgraph Client_A [Peer A (Alice)]
-        style Client_A fill:#1e293b,stroke:#3b82f6,color:#fff
-        A_RAM[RAM Only Storage]
-        A_Keys[Ephemeral Keys]
+    subgraph Client_A ["Peer A (Alice)"]
+        A_RAM["RAM Only Storage"]
+        A_Keys["Ephemeral Keys"]
     end
 
-    subgraph Client_B [Peer B (Bob)]
-        style Client_B fill:#1e293b,stroke:#10b981,color:#fff
-        B_RAM[RAM Only Storage]
-        B_Keys[Ephemeral Keys]
+    subgraph Client_B ["Peer B (Bob)"]
+        B_RAM["RAM Only Storage"]
+        B_Keys["Ephemeral Keys"]
     end
 
-    Server((Signaling Server))
-    style Server fill:#f43f5e,stroke:#fff,color:#fff
-    Tunnel[Secure Tunnel]
+    Server(("Signaling Server"))
+    Tunnel["Secure Tunnel"]
 
     %% Signaling
-    A_RAM -.->|Signaling / Handshake| Tunnel
-    Tunnel -.->|Relay Fallback| Server
-    Server -.->|Relay Fallback| Tunnel
-    Tunnel -.->|Signaling / Handshake| B_RAM
+    A_RAM -.->|"Signaling / Handshake"| Tunnel
+    Tunnel -.->|"Relay Fallback"| Server
+    Server -.->|"Relay Fallback"| Tunnel
+    Tunnel -.->|"Signaling / Handshake"| B_RAM
 
     %% Direct P2P
-    A_RAM <==>|WebRTC DataChannel <br/> AES-256-GCM E2EE| B_RAM
+    A_RAM <==>|"WebRTC DataChannel <br/> AES-256-GCM E2EE"| B_RAM
 
     %% Identity
-    A_Keys -- Visual Fingerprint Check --> B_Keys
+    A_Keys -- "Visual Fingerprint Check" --> B_Keys
+
+    %% Styling
+    style Client_A fill:#1e293b,stroke:#3b82f6,color:#fff
+    style Client_B fill:#1e293b,stroke:#10b981,color:#fff
+    style Server fill:#f43f5e,stroke:#fff,color:#fff
 ```
 
 ## Features
