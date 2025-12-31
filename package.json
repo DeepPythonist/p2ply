@@ -1,0 +1,15 @@
+{
+    "name": "p2ply",
+    "version": "1.0.0",
+    "description": "Secure P2P Communication System",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "socket.io": "^4.7.2"
+    },
+    "author": "DeepPythonist",
+    "license": "ISC"
+}
