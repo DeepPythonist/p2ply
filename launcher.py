@@ -85,7 +85,7 @@ def main():
         
         p_tunnel = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
         
-        print("[*] Waiting for tunnel URL... (SSH output will appear below)")
+        print("[*] Waiting for tunnel URL...")
         try:
             while True:
                 line = p_tunnel.stdout.readline()
@@ -95,8 +95,9 @@ def main():
                 if match:
                     url = match.group(1)
                     if 'admin.localhost.run' not in url and 'localhost.run/docs' not in url:
-                        print(f"\n\n[+] REMOTE ACCESS URL: {url}")
+                        print(f"\n[+] REMOTE ACCESS URL: {url}")
                         print("[!] Share this URL ONLY with trusted peers.")
+                        print("[*] Opening browser...")
                         
                         try:
                             req = urllib.request.Request(
@@ -106,13 +107,12 @@ def main():
                             )
                             urllib.request.urlopen(req)
                         except Exception as e:
-                            print(f"[!] Failed to sync URL with server: {e}")
+                            print(f"\n[!] Failed to sync URL with server: {e}")
                         
-                        print("[*] Opening browser...")
                         webbrowser.open(url)
                         break
         except Exception as e:
-            print(f"[!] Tunnel error: {e}")
+            print(f"\n[!] Tunnel error: {e}")
 
     print("\n[*] System active. Press Ctrl+C to stop.")
     
