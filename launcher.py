@@ -7,6 +7,9 @@ import time
 import socket
 import re
 import tempfile
+import webbrowser
+import urllib.request
+import json
 
 PROJ_DIR = os.path.dirname(os.path.abspath(__file__))
 SERVER_FILE = os.path.join(PROJ_DIR, 'server.js')
@@ -61,8 +64,6 @@ def main():
     if p_node.poll() is not None:
         print("[!] Node server failed to start.")
         sys.exit(1)
-
-
     
     if remote_mode:
         print("[*] establishing secure tunnel...")
@@ -98,8 +99,6 @@ def main():
                         print("[!] Share this URL ONLY with trusted peers.")
                         
                         try:
-                            import urllib.request
-                            import json
                             req = urllib.request.Request(
                                 f"http://localhost:{port}/set-remote-url",
                                 data=json.dumps({"url": url}).encode('utf-8'),
@@ -108,7 +107,9 @@ def main():
                             urllib.request.urlopen(req)
                         except Exception as e:
                             print(f"[!] Failed to sync URL with server: {e}")
-                            
+                        
+                        print("[*] Opening browser...")
+                        webbrowser.open(url)
                         break
         except Exception as e:
             print(f"[!] Tunnel error: {e}")

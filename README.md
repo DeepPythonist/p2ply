@@ -70,9 +70,23 @@ git clone https://github.com/DeepPythonist/p2ply.git
 cd p2ply
 ```
 
-### 3. Launching
-Run the secure launcher script. This will start the server and establish a secure tunnel for remote access.
+### 3. Launching (Universal Auto-Installer)
+
+**Windows:**
+1.  Download/Copy `install_win.bat`.
+2.  Run it. 
+*(It warns about VPN, installs Git/Python/Node automatically via Winget, clones the repo, and launches the app)*
+
+**Mac:**
+1.  Download/Clone and run `install_mac.command`.
+*(It warns about VPN, checks for tools, and sets up everything)*
+
+**Manual:**
 ```bash
+# Clone
+git clone https://github.com/DeepPythonist/p2ply.git
+cd p2ply
+# Run
 python3 launcher.py
 ```
 
