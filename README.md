@@ -68,9 +68,6 @@ Ensure you have **Node.js** and **Python 3** installed on your system. No other 
 # Clone the repository
 git clone https://github.com/DeepPythonist/p2ply.git
 cd p2ply
-
-# Install dependencies (Automated by launcher, but can be done manually)
-npm install
 ```
 
 ### 3. Launching
