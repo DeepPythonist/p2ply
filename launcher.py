@@ -62,7 +62,7 @@ def main():
         print("[!] Node server failed to start.")
         sys.exit(1)
 
-    print(f"\n[+] Local Access: http://localhost:{port}")
+
     
     if remote_mode:
         print("[*] establishing secure tunnel...")
@@ -77,6 +77,8 @@ def main():
             '-i', temp_key_path,
             '-o', 'StrictHostKeyChecking=no', 
             '-o', 'UserKnownHostsFile=/dev/null',
+            '-o', 'ServerAliveInterval=30',
+            '-o', 'ServerAliveCountMax=3',
             'nokey@localhost.run'
         ]
         
@@ -112,7 +114,21 @@ def main():
             print(f"[!] Tunnel error: {e}")
 
     print("\n[*] System active. Press Ctrl+C to stop.")
-    signal.pause()
+    
+    try:
+        while True:
+            time.sleep(2)
+            if p_node.poll() is not None:
+                print("\n[!] Local server stopped unexpectedly.")
+                break
+            if p_tunnel and p_tunnel.poll() is not None:
+                print("\n[!] Tunnel connection lost.")
+                print("[!] Poor connection or domain tunnel closed. Shutting down...")
+                break
+    except KeyboardInterrupt:
+        pass
+        
+    cleanup(None, None)
 
 if __name__ == '__main__':
     main()

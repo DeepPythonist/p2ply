@@ -60,19 +60,64 @@ graph TD
 
 ## Getting Started
 
-1.  **Clone the repo**
-    ```bash
-    git clone https://github.com/DeepPythonist/p2ply.git
-    cd p2ply
-    ```
+### 1. Requirements
+Ensure you have **Node.js** and **Python 3** installed on your system. No other external tools are needed.
 
-2.  **Launch the Ghost**
-    ```bash
-    python3 launcher.py
-    ```
+### 2. Installation
+```bash
+# Clone the repository
+git clone https://github.com/DeepPythonist/p2ply.git
+cd p2ply
 
-3.  **Share & Vanish**
-    Share the generated link. Verify footprints. Chat. Delete.
+# Install dependencies (Automated by launcher, but can be done manually)
+npm install
+```
+
+### 3. Launching
+Run the secure launcher script. This will start the server and establish a secure tunnel for remote access.
+```bash
+python3 launcher.py
+```
+
+---
+
+## Detailed Usage Guide
+
+Follow these steps for a zero-trace communication session:
+
+### Step 1: Initialize the Session
+Once you run `launcher.py`, you will see a console output like this:
+`[+] REMOTE ACCESS URL: https://3fd41d4ffe2ae4.lhr.life`
+
+Open that URL in your browser. You are now at the **Identity Generation** stage.
+
+### Step 2: Create a Room
+1.  Click **"Create Secure Room"**. 
+2.  A 6-digit **Pairing Code** will be generated (e.g., `482 910`). 
+3.  Click **"Copy Invite Link"**. This link looks like this:  
+    `https://3fd41d4ffe2ae4.lhr.life?code=482910`
+
+### Step 3: Invite your Peer
+Send that link to the person you want to talk to via any channel. 
+> **Note**: Even if this link is intercepted, the attacker cannot decrypt the final chat without passing the next step.
+
+### Step 4: The Handshake
+1.  When your peer opens the link, the code is auto-filled. They just click **"Join Room"**.
+2.  Both of you will immediately see the **Security Check** screen.
+
+### Step 5: Visual Verification (Crucial)
+You will see two "Fingerprints" on your screen. 
+**Alice's screen MUST show the same Peer Fingerprint that Bob sees as his own Identity.**
+*   Ask your peer: *"Does your identity end in A4B2?"*
+*   If they match, both click **"YES, CONNECT"**.
+
+### Step 6: Secure Communication
+You are now in a **True P2P E2EE** tunnel. You can chat freely knowing:
+*   No data touched a hard drive.
+*   The signaling server only saw encrypted noise.
+*   Once you click **"END SESSION"**, the keys are purged from RAM.
+
+---
 
 ## Security Warning ⚠️
 
